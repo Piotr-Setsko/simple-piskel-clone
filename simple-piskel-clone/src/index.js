@@ -3,15 +3,14 @@ import "./style.css";
 const canvas = document.querySelector('.canvas');
 const ctx = canvas.getContext('2d');
 const frameCanvas = document.querySelector('.frame-canvas');
-const ctx2 = frameCanvas.getContext('2d');
-ctx2.imageSmoothingEnabled = false;
+
 
 const DEFAULT_CANVAS_SIZE = 512;
 
 const clone = document.querySelector('.frame-clone');
 const listFrames = document.querySelector('.frames-list');
 const del = document.querySelector('.frame-delete');
-const item = document.querySelector('.frame-item');
+const item = document.querySelectorAll('.frames-item');
 const newFrame = document.querySelector('.frame-new');
 const size32 = document.querySelector('.size-32');
 const size64 = document.querySelector('.size-64');
@@ -51,6 +50,28 @@ newFrame.addEventListener('click', () => {
   getFrame();
 });
 
+let convasItemFrame;
+let ctx2;
+listFrames.addEventListener('click', () => {
+  const frameToConvas =  document.querySelectorAll('.frame-canvas');
+  convasItemFrame = event.target;
+  ctx2 = convasItemFrame.getContext('2d');
+  ctx2.imageSmoothingEnabled = false;
+  frameToConvas.forEach((item) => {
+  if (event.target === item) {
+    const convasItem = event.target;
+    const ctx3 = convasItem.getContext('2d');
+    let oldItemimg = ctx3.getImageData(0, 0, convasItem.width, convasItem.height);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.imageSmoothingEnabled = false;
+    ctx.drawImage(convasItem, 0, 0, convasItem.width, convasItem.height, 0, 0, canvas.width, canvas.height);
+  }
+  })
+})
+
+
+
+
 function getFrame() {
   const frame = `<li class="frames-item item-${i}">
       <canvas class="frame-canvas" width="100" height="100"></canvas>
@@ -59,6 +80,8 @@ function getFrame() {
     listFrames.insertAdjacentHTML("beforeend", frame);
     i += 1;
   }
+
+
 
 
 const list = document.querySelector('.instrument__list');
