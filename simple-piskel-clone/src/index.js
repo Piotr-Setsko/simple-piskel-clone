@@ -7,9 +7,8 @@ const frameCanvas = document.querySelector('.frame-canvas');
 
 const DEFAULT_CANVAS_SIZE = 512;
 
-const clone = document.querySelector('.frame-clone');
+
 const listFrames = document.querySelector('.frames-list');
-//const del = document.querySelector('.frame-delete');
 const item = document.querySelectorAll('.frames-item');
 const newFrame = document.querySelector('.frame-new');
 const size32 = document.querySelector('.size-32');
@@ -47,7 +46,8 @@ function setCanvasSize(sizeCanvas) {
 
 let i = 0
 newFrame.addEventListener('click', () => {
-  getFrame();
+  const domPlace = 'beforeend';
+  getFrame(listFrames, domPlace);
 });
 
 let convasItemFrame = document.querySelector('.frame-canvas');
@@ -71,19 +71,33 @@ listFrames.addEventListener('click', () => {
   const del = document.querySelectorAll('.frame-delete');
   del.forEach((item) => {
     if (event.target === item) {
-      item.parentElement.remove();
+      event.target.parentElement.remove();
+    }
+  })
+
+  const clone = document.querySelectorAll('.frame-clone');
+  clone.forEach((item) => {
+    if (event.target === item) {
+    const domPlace = 'afterend';
+    getFrame(event.target.parentElement, domPlace);
+    console.log(event.target.parentElement.nextElementSibling.children[0]);
+    const firstCanvas = event.target.parentElement.children[0];
+    const ctx = firstCanvas.getContext('2d');
+    const cloneCanvas = event.target.parentElement.nextElementSibling.children[0];
+    const ctx3 = cloneCanvas.getContext('2d');
+    ctx3.drawImage(firstCanvas, 0, 0, firstCanvas.width, firstCanvas.height, 0, 0, cloneCanvas.width, cloneCanvas.height);
     }
   })
 })
 
 
-function getFrame() {
+function getFrame(place, domPlace) {
   const frame = `<li class="frames-item item-${i}">
       <canvas class="frame-canvas" width="100" height="100"></canvas>
       <button class="frame-clone">clone</button>
       <button class="frame-delete delete" >delete</button>
     </li>`
-    listFrames.insertAdjacentHTML("beforeend", frame);
+    place.insertAdjacentHTML(domPlace, frame);
     i += 1;
   }
 
