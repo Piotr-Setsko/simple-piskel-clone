@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div class="wrapper__main">
+    <header class="page-header">
+      <div class="main-nav">
+        <button class="main-nav__button button"></button>
+        <h1 class="page-header__title">CodeJam - Pallete</h1>
+      </div>
+      <button class="page-header__menu button"></button>
+    </header>
+    <main class="page-main">
+      <div class="wrapper__left-section">
+        <section class="instrument">
+          <ul class="instrument__list page-list">
+            <li class="page-list__item"><button class="page-list__button page-list__button--bucket">Paint bucket</button></li>
+            <li class="page-list__item"><button class="page-list__button page-list__button--colorer">Choose color</button></li>
+            <li class="page-list__item active"><button class="page-list__button page-list__button--pencil">Pencil</button><button class="pencil__size pencil__size--x1">x1</button><button class="pencil__size pencil__size--x2">x2</button><button class="pencil__size pencil__size--x3">x3</button><button class="pencil__size pencil__size--x4">x4</button></li>
+            <li class="page-list__item"><button class="page-list__button page-list__button--transform" disabled>Transform</button></li>
+          </ul>
+        </section>
+        <section class="color">
+          <form class="color__list page-list">
+            <label class="page-list__legend page-list__legend--current"><input type="color" value="#00ff00" class="page-list__button page-list__button--current">Current color</label>
+            <label class="page-list__legend page-list__legend--prev"><input type="color" value="#ffffff" class="page-list__button" disabled>Prev color</label>
+            <label class="page-list__legend page-list__legend--red"><input type="color" value="#f74141" class="page-list__button" disabled>red</label>
+            <label class="page-list__legend page-list__legend--blue"><input type="color" value="#41B6F7" class="page-list__button" disabled>blue</label>
+          </form>
+        </section>
+      </div>
+      <div class="frames-section">
+        <ol class="frames-list">
+          <li class="frames-item">
+            <canvas class="frame-canvas" width="100" height="100"></canvas>
+            <button class="frame-clone clone" onclick="getCloneFrame()" >clone</button>
+            <button class="frame-delete delete" >delete</button>
+          </li>
+        </ol>
+        <button class="frame-new">new frame</button>
+      </div>
+      <div class="canvas-section">
+        <button class="canvas-size size-32">32x32</button>
+        <button class="canvas-size size-64">64x64</button>
+        <button class="canvas-size size-128">128x128</button>
+        <canvas class="canvas" width="512" height="512"></canvas>
+      </div>
+    </main>
+  </div>
+</body>
+</html>
