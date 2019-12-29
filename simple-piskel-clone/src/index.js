@@ -23,7 +23,6 @@ canvas.width = sizeCanvas;
 canvas.height = sizeCanvas;
 
 canvasSection.addEventListener('click', ()=> {
-  console.log(event.target);
   if (event.target === size64 && sizeCanvas !== 64) {
     sizeCanvas = 64;
     setCanvasSize(sizeCanvas);
@@ -220,15 +219,29 @@ function fill() {
   ctx.fill();
 }
 
-pencil.addEventListener('click', () => {
-  
+let sizePen = 1;
+list.addEventListener('click', () => {
+  const x1 = document.querySelector('.pencil__size--x1');
+  const x2 = document.querySelector('.pencil__size--x2');
+  const x3 = document.querySelector('.pencil__size--x3');
+  const x4 = document.querySelector('.pencil__size--x4');
+  if (event.target === x2) {
+    sizePen = 2;
+    console.log(sizePen)
+  } else if (event.target === x3) {
+    sizePen = 3;
+  } else if (event.target === x4) {
+    sizePen = 4;
+  } else if (event.target === x1) {
+    sizePen = 1;
+  }
 })
 
-function penDraw(e) {
+function penDraw(e, sizePen) {
   const x = Math.floor(e.layerX / (DEFAULT_CANVAS_SIZE / canvas.width));
   const y = Math.floor(e.layerY / (DEFAULT_CANVAS_SIZE / canvas.height));
   ctx.fillStyle = current.value;
-  ctx.fillRect(x, y, 1, 1);
+  ctx.fillRect(x, y, sizePen, sizePen);
 }
 
 canvas.addEventListener('mousedown', (e) => {
@@ -242,12 +255,13 @@ canvas.addEventListener('mousedown', (e) => {
 
 canvas.onmousedown = (e) => {
   if (pencil.parentElement.classList.contains('active')) {
-    penDraw(e);
+    console.log(sizePen);
+    penDraw(e, sizePen);
     ctx2.drawImage(canvas, 0, 0, canvas.width, canvas.height, 0, 0, frameCanvas.width, frameCanvas.height);
   }
   canvas.onmousemove = (evt) => {
     if (pencil.parentElement.classList.contains('active')) {
-      penDraw(evt);
+      penDraw(evt, sizePen);
       ctx2.drawImage(canvas, 0, 0, canvas.width, canvas.height, 0, 0, frameCanvas.width, frameCanvas.height);
     }
   };
