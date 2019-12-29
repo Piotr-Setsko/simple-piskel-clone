@@ -9,7 +9,7 @@ const DEFAULT_CANVAS_SIZE = 512;
 
 const clone = document.querySelector('.frame-clone');
 const listFrames = document.querySelector('.frames-list');
-const del = document.querySelector('.frame-delete');
+//const del = document.querySelector('.frame-delete');
 const item = document.querySelectorAll('.frames-item');
 const newFrame = document.querySelector('.frame-new');
 const size32 = document.querySelector('.size-32');
@@ -50,32 +50,38 @@ newFrame.addEventListener('click', () => {
   getFrame();
 });
 
-let convasItemFrame;
-let ctx2;
+let convasItemFrame = document.querySelector('.frame-canvas');
+let ctx2 = convasItemFrame.getContext('2d');
+ctx2.imageSmoothingEnabled = false;
+
 listFrames.addEventListener('click', () => {
   const frameToConvas =  document.querySelectorAll('.frame-canvas');
-  convasItemFrame = event.target;
-  ctx2 = convasItemFrame.getContext('2d');
-  ctx2.imageSmoothingEnabled = false;
   frameToConvas.forEach((item) => {
   if (event.target === item) {
+    convasItemFrame = event.target;
+    ctx2 = convasItemFrame.getContext('2d');
+    ctx2.imageSmoothingEnabled = false;
     const convasItem = event.target;
-    const ctx3 = convasItem.getContext('2d');
-    let oldItemimg = ctx3.getImageData(0, 0, convasItem.width, convasItem.height);
+    //ctx.imageSmoothingEnabled = false;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.imageSmoothingEnabled = false;
     ctx.drawImage(convasItem, 0, 0, convasItem.width, convasItem.height, 0, 0, canvas.width, canvas.height);
   }
+  });
+
+  const del = document.querySelectorAll('.frame-delete');
+  del.forEach((item) => {
+    if (event.target === item) {
+      item.parentElement.remove();
+    }
   })
 })
-
-
 
 
 function getFrame() {
   const frame = `<li class="frames-item item-${i}">
       <canvas class="frame-canvas" width="100" height="100"></canvas>
-      <button class="frame-clone" onclick="getCloneFrame()" >clone</button>
+      <button class="frame-clone">clone</button>
+      <button class="frame-delete delete" >delete</button>
     </li>`
     listFrames.insertAdjacentHTML("beforeend", frame);
     i += 1;
