@@ -44,10 +44,11 @@ function setCanvasSize(sizeCanvas) {
   ctx2.drawImage(canvas, 0, 0, canvas.width, canvas.height, 0, 0, frameCanvas.width, frameCanvas.height);
 }
 
-let i = 0
+//let i = 0
 newFrame.addEventListener('click', () => {
   const domPlace = 'beforeend';
   getFrame(listFrames, domPlace);
+  //animationPlay();
 });
 
 let convasItemFrame = document.querySelector('.frame-canvas');
@@ -92,16 +93,33 @@ listFrames.addEventListener('click', () => {
 
 
 function getFrame(place, domPlace) {
-  const frame = `<li class="frames-item item-${i}">
+  const frame = `<li class="frames-item">
       <canvas class="frame-canvas" width="100" height="100"></canvas>
       <button class="frame-clone">clone</button>
       <button class="frame-delete delete" >delete</button>
     </li>`
     place.insertAdjacentHTML(domPlace, frame);
-    i += 1;
+    //i += 1;
   }
 
+  var framesPerSecond = 1;
 
+
+function animationPlay() {
+  const player = document.querySelector('.animation-player');
+  const frameToConvas =  document.querySelectorAll('.frame-canvas');
+  let dataURL;
+  setTimeout(function() {
+  window.requestAnimationFrame(animationPlay);
+  for (let i=0; i < frameToConvas.length; i += 1) {
+    dataURL = frameToConvas[i].toDataURL("image/png");
+    //console.log(dataURL);
+    player.style.backgroundImage = `url(${dataURL})`;
+    //console.log(player.style.backgroundImage);
+      }
+  }, 1000 / framesPerSecond);
+}
+animationPlay();
 
 
 const list = document.querySelector('.instrument__list');

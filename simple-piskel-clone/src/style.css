@@ -191,3 +191,9 @@ input[type="color"]::-webkit-color-swatch {
   height: 512px;
   background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAABlBMVEVMTExVVVUnhsEkAAAAHUlEQVR4AWOAAUYoQOePEAUj3v9oYDQ9gMBoegAAJFwCAbLaTIMAAAAASUVORK5CYII=');
 }
+
+.animation-player {
+  border: 1px solid black;
+  width: 130px;
+  height: 130px;
+}
