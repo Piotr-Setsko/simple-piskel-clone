@@ -1,0 +1,40 @@
+.page-header {
+  display: flex;
+  padding: 10px 16px;
+  justify-content: space-between;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.24), 0px 0px 4px rgba(185, 152, 152, 0.12);
+}
+
+.button {
+  display: inline-block;
+  padding: 0;
+  background: none;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  border: transparent;
+}
+
+.main-nav__button {
+  position: relative;
+  top: 5px;
+  width: 21px;
+  height: 18px;
+  background-image: url("./images/burger.svg");
+}
+
+.page-header__menu {
+  width: 7px;
+  height: 18px;
+  background-image: url("./images/dotes.svg");
+}
+
+.page-header__title {
+  display: inline-block;
+  margin: 0;
+  margin-left: 35px;
+  font-family: 'Roboto', Arial, sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 23px;
+  color: rgba(0, 0, 0, 0.87);
+}

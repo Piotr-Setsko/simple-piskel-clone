@@ -1,12 +1,27 @@
-import "./style.css";
+import renderHeader from './screens/header-section';
+import renderMainSection from './screens/main-section';
+
+
+
+
+function renderApp() {
+  const root = document.createElement('div');
+  root.classList.add('wrapper__main');
+  root.style.margin = '0 auto';
+  root.style.width = '1200';
+  document.body.prepend(root);
+
+  renderHeader();
+  renderMainSection();
+}
+
+renderApp();
 
 const canvas = document.querySelector('.canvas');
 const ctx = canvas.getContext('2d');
+
 const frameCanvas = document.querySelector('.frame-canvas');
-
-
 const DEFAULT_CANVAS_SIZE = 512;
-
 
 const listFrames = document.querySelector('.frames-list');
 const item = document.querySelectorAll('.frames-item');
@@ -83,7 +98,7 @@ listFrames.addEventListener('click', () => {
     getFrame(event.target.parentElement, domPlace);
     console.log(event.target.parentElement.nextElementSibling.children[0]);
     const firstCanvas = event.target.parentElement.children[0];
-    const ctx = firstCanvas.getContext('2d');
+    //const ctx = firstCanvas.getContext('2d');
     const cloneCanvas = event.target.parentElement.nextElementSibling.children[0];
     const ctx3 = cloneCanvas.getContext('2d');
     ctx3.drawImage(firstCanvas, 0, 0, firstCanvas.width, firstCanvas.height, 0, 0, cloneCanvas.width, cloneCanvas.height);
@@ -144,23 +159,6 @@ const hexToRGBA = (hexStr) => [
   255,
 ];
 
-function rgbaToHEX(rgbaStr) {
-  const arr = rgbaStr;
-  arr[0] = arr[0].toString(16);
-  arr[1] = arr[1].toString(16);
-  arr[2] = arr[2].toString(16);
-  if (arr[0].length === 1) {
-    arr[0] = `0${arr[0]}`;
-  }
-  if (arr[1].length === 1) {
-    arr[1] = `0${arr[1]}`;
-  }
-  if (arr[2].length === 1) {
-    arr[2] = `0${arr[2]}`;
-  }
-
-  return `#${arr[0]}${arr[1]}${arr[2]}`;
-}
 
 function drawPicture() {
   const imgData = new ImageData(Uint8ClampedArray
@@ -217,7 +215,7 @@ list.addEventListener('click', (evt) => {
     }
   }
 });
-
+/*
 function addCurentColor(elem) {
   const rgba = elem.children[0].value;
   current.value = rgba;
@@ -243,7 +241,7 @@ current.addEventListener('input', (event) => {
   }
   prevColor = event.target.value;
 });
-
+*/
 
 document.addEventListener('keydown', (evt) => {
   for (let i = 0; i < list.children.length; i += 1) {
@@ -260,77 +258,11 @@ document.addEventListener('keydown', (evt) => {
   }
 });
 
-function pick(event) {
-  const x = event.layerX / 128;
-  const y = event.layerY / 128;
-  const pixel = ctx.getImageData(x, y, 1, 1);
-  const { data } = pixel;
-  const rgba = rgbaToHEX(Array.from(data));
-  current.value = rgba;
-  if (current.value !== prevColor) {
-    previous.children[0].value = prevColor;
-  }
-  prevColor = rgba;
-}
 
-function fill() {
-  ctx.beginPath();
-  ctx.fillStyle = current.value;
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-  ctx.fill();
-}
 
-let sizePen = 1;
-list.addEventListener('click', () => {
-  const x1 = document.querySelector('.pencil__size--x1');
-  const x2 = document.querySelector('.pencil__size--x2');
-  const x3 = document.querySelector('.pencil__size--x3');
-  const x4 = document.querySelector('.pencil__size--x4');
-  if (event.target === x2) {
-    sizePen = 2;
-    console.log(sizePen)
-  } else if (event.target === x3) {
-    sizePen = 3;
-  } else if (event.target === x4) {
-    sizePen = 4;
-  } else if (event.target === x1) {
-    sizePen = 1;
-  }
-})
 
-function penDraw(e, sizePen) {
-  const x = Math.floor(e.layerX / (DEFAULT_CANVAS_SIZE / canvas.width));
-  const y = Math.floor(e.layerY / (DEFAULT_CANVAS_SIZE / canvas.height));
-  ctx.fillStyle = current.value;
-  ctx.fillRect(x, y, sizePen, sizePen);
-}
 
-canvas.addEventListener('mousedown', (e) => {
-  if (picker.parentElement.classList.contains('active')) {
-    pick(e);
-  }
-  if (bucket.parentElement.classList.contains('active')) {
-    fill();
-  }
-});
+export { ctx2, frameCanvas };
 
-canvas.onmousedown = (e) => {
-  if (pencil.parentElement.classList.contains('active')) {
-    console.log(sizePen);
-    penDraw(e, sizePen);
-    ctx2.drawImage(canvas, 0, 0, canvas.width, canvas.height, 0, 0, frameCanvas.width, frameCanvas.height);
-  }
-  canvas.onmousemove = (evt) => {
-    if (pencil.parentElement.classList.contains('active')) {
-      penDraw(evt, sizePen);
-      ctx2.drawImage(canvas, 0, 0, canvas.width, canvas.height, 0, 0, frameCanvas.width, frameCanvas.height);
-    }
-  };
 
-  canvas.onmouseup = () => {
-    canvas.focus();
-    localStorage.setItem('paint', canvas.toDataURL());
-    canvas.onmousemove = null;
-  };
-};
 

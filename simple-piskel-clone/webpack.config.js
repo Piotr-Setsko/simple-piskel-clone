@@ -5,7 +5,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
-  entry: './src/index.js',
+  entry: './src/app.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'main.js',
@@ -51,12 +51,8 @@ module.exports = {
       cleanAfterEveryBuildPatterns: ['dist'],
     }),
     new ExtractTextPlugin({ filename: 'style.css' }),
-    new HtmlWebpackPlugin({
-      template: './src/index.html',
-      filename: 'index.html',
+    new HtmlWebpackPlugin({ filename: 'index.html',
     }),
-    new CopyWebpackPlugin([
-      { from: 'src/assets/images', to: 'assets/images' },
-    ]),
+    
   ],
 };

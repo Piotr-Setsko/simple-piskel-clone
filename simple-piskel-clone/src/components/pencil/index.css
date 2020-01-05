@@ -1,0 +1,4 @@
+.page-list__button--pencil::before {
+  background-image: url("./images/pencil.svg");
+}
+

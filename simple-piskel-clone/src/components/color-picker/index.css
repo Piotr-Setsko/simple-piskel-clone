@@ -1,0 +1,3 @@
+.page-list__button--colorer::before {
+  background-image: url("./images/colorer.svg");
+}
