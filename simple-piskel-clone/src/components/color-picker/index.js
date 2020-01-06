@@ -25,7 +25,7 @@ function pick(event, ctx, current, prevColor, previous, sizeCanvas) {
   //console.log(data);
   //const rgba = rgbaToHEX(Array.from(data));
   const rgba = data;
-  //current.value = rgba;
+  current.value = rgba;
   current.parentElement.style.backgroundColor = `rgba(${rgba})`;
   if (current.style.backgroundColor !== prevColor) {
     previous.style.backgroundColor = prevColor;

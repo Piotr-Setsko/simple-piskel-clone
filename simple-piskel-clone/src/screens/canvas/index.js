@@ -1,5 +1,5 @@
 import './index.css';
-import renderMainCanvas from '../../components/canvas';
+import { renderMainCanvas } from '../../components/canvas';
 
 function renderCanvas() {
   const markup = (

@@ -1,0 +1,23 @@
+.size-switcher__wrapper {
+  box-sizing: content-box;
+  display: flex;
+  justify-content: space-around;
+  margin-top: 10px;
+  margin-left: 10px;
+  width: 150px;
+}
+
+.size-switcher__btn {
+  display: block;
+  width: 30px;
+  height: 30px;
+  border: 5px solid transparent;
+  border-radius: 50%;
+  background-color: #ffffff;
+}
+
+.size-switcher__active {
+  border: 1px solid yellow;
+  background-color: yellow;
+  border: 1px solid orange;
+}

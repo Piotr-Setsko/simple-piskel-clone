@@ -1,17 +1,23 @@
+import './index.css';
+
 function renderColorSwitcher() {
   const markup = (
     `<section class="color">
-      <form class="color__list page-list"></form>
+      <form class="color__list page-list">
+        <div class="color__wrapper color__wrapper--current"></div>
+        <div class="color__wrapper color__wrapper--previous"></div>
+      </form>
     </section>`
   );
 
   const tool = document.querySelector('.instrument');
   tool.insertAdjacentHTML('afterend', markup);
 
-  const formColor = document.querySelector('.color__list');
+  const currentColor = document.querySelector('.color__wrapper--current');
+  const previousColor = document.querySelector('.color__wrapper--previous');
 
-  formColor.append(current);
-  formColor.append(previous);
+  currentColor.append(current);
+  previousColor.append(previous);
 }
 
 const currentInput = document.createElement('input');
@@ -21,7 +27,8 @@ currentInput.setAttribute('value', '#00ff00');
 currentInput.style.display = 'none';
 const current = document.createElement('label');
 current.classList.add('page-list__legend', 'page-list__legend--current');
-current.innerHTML = 'Current color';
+current.style.backgroundColor ='rgba(0, 0, 0, 1)';
+//current.innerHTML = 'Current color';
 current.prepend(currentInput);
 
 const prevInput = document.createElement('input');
@@ -31,8 +38,8 @@ prevInput.setAttribute('value', '#ffffff');
 prevInput.style.display = 'none';
 const previous = document.createElement('label');
 previous.classList.add('page-list__legend', 'page-list__legend--prev');
-previous.style.backgroundColor ='rgba(255,255,255,255)';
-previous.innerHTML = 'Prev color';
+previous.style.backgroundColor ='rgba(0, 0, 0, 0)';
+//previous.innerHTML = 'Prev color';
 previous.prepend(prevInput);
 
 let prevColor = 'rgba(255,255,255,255)';

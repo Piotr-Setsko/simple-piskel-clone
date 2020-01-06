@@ -29,13 +29,27 @@ canvas.setAttribute('width', 512);
 
 const ctx = canvas.getContext('2d');
 
+
+canvas.addEventListener('click', event => {
+  if (bucket.parentElement.classList.contains('active')) {
+    //const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height)
+    const DEFAULT_CANVAS_SIZE = 512;
+    const x = Math.floor(event.layerX / (DEFAULT_CANVAS_SIZE / canvas.width));
+    const y = Math.floor(event.layerY / (DEFAULT_CANVAS_SIZE / canvas.width));
+    const color = current.style.backgroundColor.match(/\d+/g);
+    fill(ctx, x, y, color);
+    //console.log(imageData);
+    //ctx.putImageData(imageData, 0, 0)
+  }
+})
+
 canvas.onmousedown = (e) => {
   if (picker.parentElement.classList.contains('active')) {
     pick(e, ctx, current, prevColor, previous, canvas.width);
   }
-  if (bucket.parentElement.classList.contains('active')) {
-    fill(ctx, current, canvas.width, canvas.height);
-  }
+  //if (bucket.parentElement.classList.contains('active')) {
+    //fill(ctx, current, canvas.width, canvas.height);
+  //}
   if (pencil.parentElement.classList.contains('active')) {
    // console.log(sizePen);
     penDraw(e, ctx, canvas.width, current);
@@ -57,4 +71,4 @@ canvas.onmousedown = (e) => {
 }
 
 
-export default renderMainCanvas;
+export { renderMainCanvas, canvas };

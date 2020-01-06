@@ -1,0 +1,45 @@
+input[type="color"] {
+  -webkit-appearance: none;
+    vertical-align: middle;
+    display: inline-block;
+    padding-right: 35px;
+    border: none;
+    width: 25px;
+    height: 25px;
+    border-width: 0;
+    border-radius: 50%;
+}
+
+input[type="color"]:disabled {
+  opacity: 1;
+}
+
+input[type="color"]::-webkit-color-swatch {
+  border: none;
+}
+
+.color__wrapper {
+  width: 125px;
+  height: 125px;
+  background-image: url('./images/background.png');
+}
+
+.color__wrapper--current {
+  margin-left: 10px;
+}
+
+.color__wrapper--previous {
+  margin-left: auto;
+  margin-right: 10px;
+}
+
+.page-list__legend {
+  display: block;
+  width: 115px;
+  height: 115px;
+  border: 5px solid gray;
+}
+
+.page-list__legend:active {
+  background-color: lightgrey;
+}

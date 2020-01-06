@@ -258,10 +258,6 @@ document.addEventListener('keydown', (evt) => {
   }
 });
 
-
-
-
-
 export { ctx2, frameCanvas };
 
 
