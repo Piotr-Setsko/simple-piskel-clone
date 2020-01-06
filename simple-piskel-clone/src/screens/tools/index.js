@@ -3,6 +3,7 @@ import { renderColorPicker } from '../../components/color-picker';
 import { renderPaintBucket } from '../../components/paint-bucket';
 import { renderPencil } from '../../components/pencil';
 import { renderColorSwitcher } from '../../components/color-switcher';
+import { renderPaintPixels } from '../../components/paint-pixels';
 
 function renderTools() {
   const markup = (
@@ -16,6 +17,7 @@ function renderTools() {
   toolsSection.insertAdjacentHTML('afterbegin', markup);
 
   renderPencil();
+  renderPaintPixels();
   renderPaintBucket();
   renderColorPicker();
   renderColorSwitcher();

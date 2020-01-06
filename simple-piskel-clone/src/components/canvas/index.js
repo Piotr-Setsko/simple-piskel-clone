@@ -4,6 +4,7 @@ import { ctx2, frameCanvas } from '../../app';
 import { current, previous, prevColor } from '../color-switcher';
 import { fill, bucket } from '../paint-bucket';
 import { pick, picker } from '../color-picker';
+import { paintPixels, pixelBucket } from '../paint-pixels';
 
 
 function renderMainCanvas() {
@@ -31,15 +32,15 @@ const ctx = canvas.getContext('2d');
 
 
 canvas.addEventListener('click', event => {
-  if (bucket.parentElement.classList.contains('active')) {
-    //const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height)
-    const DEFAULT_CANVAS_SIZE = 512;
+  const DEFAULT_CANVAS_SIZE = 512;
     const x = Math.floor(event.layerX / (DEFAULT_CANVAS_SIZE / canvas.width));
     const y = Math.floor(event.layerY / (DEFAULT_CANVAS_SIZE / canvas.width));
     const color = current.style.backgroundColor.match(/\d+/g);
+  if (bucket.parentElement.classList.contains('active')) {
     fill(ctx, x, y, color);
-    //console.log(imageData);
-    //ctx.putImageData(imageData, 0, 0)
+  }
+  if (pixelBucket.parentElement.classList.contains('active')) {
+    paintPixels(ctx, x, y, color);
   }
 })
 

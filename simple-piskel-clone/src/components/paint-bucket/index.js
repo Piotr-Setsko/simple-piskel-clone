@@ -18,71 +18,10 @@ const bucket = document.createElement('button');
 bucket.classList.add('page-list__button', 'page-list__button--bucket');
 bucket.innerHTML = 'Paint bucket';
 
-
-function getColorAtPixel(imageData, x, y) {
-  const {width, data} = imageData
-
-  return {
-    r: data[4 * (width * y + x) + 0],
-    g: data[4 * (width * y + x) + 1],
-    b: data[4 * (width * y + x) + 2],
-    a: data[4 * (width * y + x) + 3]
-  }
-}
-
-function setColorAtPixel(imageData, color, x, y) {
-  const {width, data} = imageData
-
-  data[4 * (width * y + x) + 0] = color[0] & 0xff
-  data[4 * (width * y + x) + 1] = color[1] & 0xff
-  data[4 * (width * y + x) + 2] = color[2] & 0xff
-  data[4 * (width * y + x) + 3] = color.hasOwnProperty("a") ? color.a : 255 & 0xff
-}
-
-function colorMatch(a, b) {
-  return a.r === b.r && a.g === b.g && a.b === b.b && a.a === b.a
-}
-
-var fill = function (ctx, startX, startY, fillColor) {
-  //var srcImg = ctx.getImageData(0,0,canvas.width,canvas.height);
-  //var srcData = srcImg.data;
-
-  //console.log('hi')
-  var dstImg = ctx.getImageData(0,0,canvas.width,canvas.height);
-  var dstData = dstImg.data;
-
-  var startPos = getPixelPos(startX, startY);
-
-  var startColor = {
-  	r: dstData[startPos],
-    g: dstData[startPos+1],
-    b: dstData[startPos+2],
-    a: dstData[startPos+3]
-  };
-console.log(startColor);
-console.log(fillColor)
-
-for (let i = 0; i < canvas.width; i += 1) {
-  for (let j = 0; j < canvas.height; j += 1) {
-    if (colorMatch(getColorAtPixel(dstImg, i, j), startColor)) {
-      //console.log(setColorAtPixel(dstImg, fillColor, i, j));
-      setColorAtPixel(dstImg, fillColor, i, j);
-    }
-  }
-}
-
-  ctx.putImageData(dstImg,0,0);
-};
-
-
-
-
-
-
 var getPixelPos = function (x, y) {
 	return (y * canvas.width + x) * 4;
 };
-/*
+
 var matchStartColor = function (data, pos, startColor) {
   return (data[pos]   === startColor.r &&
   				data[pos+1] === startColor.g &&
@@ -99,10 +38,6 @@ var colorPixel = function (data, pos, color) {
 
 // http://www.williammalone.com/articles/html5-canvas-javascript-paint-bucket-tool/
 var fill = function (ctx, startX, startY, fillColor) {
-  //var srcImg = ctx.getImageData(0,0,canvas.width,canvas.height);
-  //var srcData = srcImg.data;
-
-  //console.log('hi')
   var dstImg = ctx.getImageData(0,0,canvas.width,canvas.height);
   var dstData = dstImg.data;
 
@@ -164,5 +99,5 @@ var fill = function (ctx, startX, startY, fillColor) {
 
   ctx.putImageData(dstImg,0,0);
 };
-*/
+
 export { renderPaintBucket, fill, bucket };
