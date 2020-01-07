@@ -31,34 +31,6 @@ const size64 = document.querySelector('.size-64');
 const size128 = document.querySelector('.size-128');
 const canvasSection = document.querySelector('.canvas-section');
 
-let sizeCanvas = 32;
-canvas.width = sizeCanvas;
-canvas.height = sizeCanvas;
-
-canvasSection.addEventListener('click', ()=> {
-  if (event.target === size64 && sizeCanvas !== 64) {
-    sizeCanvas = 64;
-    setCanvasSize(sizeCanvas);
-  } else if (event.target === size128 && sizeCanvas !== 128) {
-    sizeCanvas = 128;
-    setCanvasSize(sizeCanvas);
-  } else if (event.target === size32 && sizeCanvas !== 32) {
-    sizeCanvas = 32;
-    setCanvasSize(sizeCanvas);
-  }
-})
-
-function setCanvasSize(sizeCanvas) {
-  let delta;
-  let oldimg = ctx.getImageData(0, 0, canvas.width, canvas.height);
-  delta = (sizeCanvas - canvas.width) / 2;
-  canvas.width = sizeCanvas;
-  canvas.height = sizeCanvas;
-  ctx.putImageData(oldimg, delta, delta);
-  ctx2.clearRect(0, 0, frameCanvas.width, frameCanvas.height);
-  ctx2.drawImage(canvas, 0, 0, canvas.width, canvas.height, 0, 0, frameCanvas.width, frameCanvas.height);
-}
-
 //let i = 0
 newFrame.addEventListener('click', () => {
   const domPlace = 'beforeend';

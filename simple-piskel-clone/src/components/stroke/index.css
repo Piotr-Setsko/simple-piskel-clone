@@ -1,0 +1,3 @@
+.page-list__button--stroke::before {
+  background-image: url("./images/stroke-lines.svg");
+}

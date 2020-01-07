@@ -5,19 +5,22 @@ import { current, previous, prevColor } from '../color-switcher';
 import { fill, bucket } from '../paint-bucket';
 import { pick, picker } from '../color-picker';
 import { paintPixels, pixelBucket } from '../paint-pixels';
+import { eraser, erasePixel } from '../eraser';
+import { stroke } from '../stroke';
+
+import { renderCanvasSizeSwither, sizeCanvas } from '../canvas-size-switcher';
+
 
 
 function renderMainCanvas() {
   const markup = (
-    `<div class="canvas-section">
-      <button class="canvas-size size-32">32x32</button>
-      <button class="canvas-size size-64">64x64</button>
-      <button class="canvas-size size-128">128x128</button>
-    </div>`
+    `<div class="canvas-section"></div>`
   );
 
   const canvasSection = document.querySelector('.page-main__central-section');
   canvasSection.insertAdjacentHTML('afterbegin', markup);
+
+  renderCanvasSizeSwither();
 
   const canvasElement = document.querySelector('.canvas-section')
   canvasElement.append(canvas);
@@ -28,8 +31,10 @@ canvas.classList.add('canvas');
 canvas.setAttribute('height', 512);
 canvas.setAttribute('width', 512);
 
-const ctx = canvas.getContext('2d');
+canvas.width = sizeCanvas;
+canvas.height = sizeCanvas;
 
+const ctx = canvas.getContext('2d');
 
 canvas.addEventListener('click', event => {
   const DEFAULT_CANVAS_SIZE = 512;
@@ -48,11 +53,10 @@ canvas.onmousedown = (e) => {
   if (picker.parentElement.classList.contains('active')) {
     pick(e, ctx, current, prevColor, previous, canvas.width);
   }
-  //if (bucket.parentElement.classList.contains('active')) {
-    //fill(ctx, current, canvas.width, canvas.height);
-  //}
+  if (eraser.parentElement.classList.contains('active')) {
+    erasePixel(e, ctx, canvas.width);
+  }
   if (pencil.parentElement.classList.contains('active')) {
-   // console.log(sizePen);
     penDraw(e, ctx, canvas.width, current);
     ctx2.drawImage(canvas, 0, 0, canvas.width, canvas.height, 0, 0, frameCanvas.width, frameCanvas.height);
   }
@@ -62,9 +66,12 @@ canvas.onmousedown = (e) => {
       penDraw(evt, ctx, canvas.width, current);
       ctx2.drawImage(canvas, 0, 0, canvas.width, canvas.height, 0, 0, frameCanvas.width, frameCanvas.height);
     }
+    if (eraser.parentElement.classList.contains('active')) {
+      erasePixel(evt, ctx, canvas.width);
+    }
   };
 
-  canvas.onmouseup = () => {
+  canvas.onmouseup = (e) => {
     canvas.focus();
     localStorage.setItem('paint', canvas.toDataURL());
     canvas.onmousemove = null;
@@ -72,4 +79,4 @@ canvas.onmousedown = (e) => {
 }
 
 
-export { renderMainCanvas, canvas };
+export { renderMainCanvas, canvas, ctx };

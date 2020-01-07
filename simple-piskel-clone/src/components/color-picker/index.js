@@ -22,8 +22,6 @@ function pick(event, ctx, current, prevColor, previous, sizeCanvas) {
   const y = event.layerY / (DEFAULT_CANVAS_SIZE / sizeCanvas);
   const pixel = ctx.getImageData(x, y, 1, 1);
   const { data } = pixel;
-  //console.log(data);
-  //const rgba = rgbaToHEX(Array.from(data));
   const rgba = data;
   current.value = rgba;
   current.parentElement.style.backgroundColor = `rgba(${rgba})`;
@@ -35,7 +33,6 @@ function pick(event, ctx, current, prevColor, previous, sizeCanvas) {
 
 function rgbaToHEX(rgbaStr) {
   const arr = rgbaStr;
-  //console.log(arr);
   arr[0] = arr[0].toString(16);
   arr[1] = arr[1].toString(16);
   arr[2] = arr[2].toString(16);

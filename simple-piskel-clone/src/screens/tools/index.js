@@ -4,18 +4,20 @@ import { renderPaintBucket } from '../../components/paint-bucket';
 import { renderPencil } from '../../components/pencil';
 import { renderColorSwitcher } from '../../components/color-switcher';
 import { renderPaintPixels } from '../../components/paint-pixels';
+import { renderEraser } from '../../components/eraser';
+import { renderStroke } from '../../components/stroke';
 
 function renderTools() {
   const markup = (
     `<section class="instrument">
-      <ul class="instrument__list page-list">
-        <li class="page-list__item"><button class="page-list__button page-list__button--transform" disabled>Transform</button></li>
-      </ul>
+      <ul class="instrument__list page-list"></ul>
     </section>`
   );
   const toolsSection = document.querySelector('.page-main__left-section');
   toolsSection.insertAdjacentHTML('afterbegin', markup);
 
+  renderStroke();
+  renderEraser();
   renderPencil();
   renderPaintPixels();
   renderPaintBucket();

@@ -4,7 +4,7 @@
   padding-top: 10px;
   padding-bottom: 10px;
   list-style: none;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.24), 0px 0px 4px rgba(0, 0, 0, 0.12);  
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.24), 0px 0px 4px rgba(0, 0, 0, 0.12);
 }
 
 .color__list {
@@ -55,14 +55,9 @@
   opacity: 0.5;
 }
 
-.page-list__button--transform::before {
-  background-image: url("./images/transform.svg");
-}
-
 .active {
   background-color: lightgrey;
 }
-
 
 .active .page-list__button {
   color: #000000;

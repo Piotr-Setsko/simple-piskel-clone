@@ -25,16 +25,16 @@ function penDraw(e, ctx, sizeCanvas, current) {
   const DEFAULT_CANVAS_SIZE = 512;
   const x = Math.floor(e.layerX / (DEFAULT_CANVAS_SIZE / sizeCanvas));
   const y = Math.floor(e.layerY / (DEFAULT_CANVAS_SIZE / sizeCanvas));
-  
+
   ctx.fillStyle = current.style.backgroundColor;
   console.log(ctx.fillStyle);
+  console.log(sizePen);
+  ctx.globalCompositeOperation = 'source-over';
   if (ctx.fillStyle === 'rgba(0, 0, 0, 0)') {
     ctx.fillStyle = "rgba(255,255,255,1)";
     ctx.globalCompositeOperation = 'destination-out';
-    console.log('hi');
   }
   ctx.fillRect(x, y, sizePen, sizePen);
-  //console.log(sizePen);
 }
 
 export { renderPencil, penDraw, pencil };
