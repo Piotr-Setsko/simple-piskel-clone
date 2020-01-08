@@ -4,6 +4,8 @@ import renderFrameCloneButton from '../clone-frame';
 import renderFrameDeleteButton from '../delete-frame';
 import { canvas, ctx } from '../canvas';
 
+import Sortable from 'sortablejs';
+
 let frameCanvas = document.createElement('canvas');
 frameCanvas.classList.add('frame-canvas');
 frameCanvas.setAttribute('height', 100);
@@ -32,6 +34,8 @@ function renderFramesList() {
 
   renderFrameNew();
 }
+
+let sortable = Sortable.create(framesList);
 
 let ctxFrame = frameCanvas.getContext('2d');
 ctxFrame.imageSmoothingEnabled = false;

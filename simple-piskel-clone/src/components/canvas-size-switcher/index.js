@@ -6,7 +6,7 @@ const canvasSizeSection = document.createElement('div');
 canvasSizeSection.classList.add('canvas-section__size-switcher');
 
 const size32 = document.createElement('button');
-size32.classList.add('canvas-size', 'size-32', 'canvas-size--active');
+size32.classList.add('canvas-size', 'size-32');
 size32.innerHTML = '32x32';
 
 const size64 = document.createElement('button');
@@ -41,14 +41,6 @@ function setCanvasSize(sizeCanvas) {
 let sizeCanvas = 32;
 
 canvasSizeSection.addEventListener('click', (event) => {
-  for (let i = 0; i < canvasSizeSection.children.length; i += 1) {
-    if (event.target !== canvasSizeSection) {
-      canvasSizeSection.children[i].classList.remove('canvas-size--active');
-      if (event.target === canvasSizeSection.children[i]) {
-        event.target.classList.add('canvas-size--active');
-      }
-    }
-  }
   if (event.target === size64 && sizeCanvas !== 64) {
     sizeCanvas = 64;
     setCanvasSize(sizeCanvas);
