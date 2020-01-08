@@ -6,9 +6,6 @@ import { fill, bucket } from '../paint-bucket';
 import { pick, picker } from '../color-picker';
 import { paintPixels, pixelBucket } from '../paint-pixels';
 import { eraser, erasePixel } from '../eraser';
-
-//import {ctx2, frameCanvas} from '../../app';
-
 import { renderCanvasSizeSwither, sizeCanvas } from '../canvas-size-switcher';
 
 const canvas = document.createElement('canvas');

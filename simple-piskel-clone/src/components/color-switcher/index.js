@@ -8,18 +8,16 @@ currentInput.style.display = 'none';
 const current = document.createElement('label');
 current.classList.add('page-list__legend', 'page-list__legend--current');
 current.style.backgroundColor = 'rgba(0, 0, 0, 1)';
-// current.innerHTML = 'Current color';
 current.prepend(currentInput);
 
 const prevInput = document.createElement('input');
 prevInput.classList.add('page-list__button');
 prevInput.setAttribute('type', 'color');
-prevInput.setAttribute('value', '#ffffff');
+prevInput.setAttribute('value', '#ff0000');
 prevInput.style.display = 'none';
 const previous = document.createElement('label');
 previous.classList.add('page-list__legend', 'page-list__legend--prev');
 previous.style.backgroundColor = 'rgba(0, 0, 0, 0)';
-// previous.innerHTML = 'Prev color';
 previous.prepend(prevInput);
 
 function renderColorSwitcher() {
@@ -42,31 +40,22 @@ function renderColorSwitcher() {
   previousColor.append(previous);
 }
 
-let prevColor = 'rgba(255,255,255,255)';
+let prevColor = 'rgba(0, 0, 0,255)';
 
-function addCurentColor(elem) {
-  const rgba = elem.style.backgroundColor;
-  // current.value = rgba;
-  // console.log(rgba);
-  current.style.backgroundColor = rgba;
-  if (current.value !== prevColor) {
-    // previous.children[0].value = prevColor;
-    previous.style.backgroundColor = prevColor;
+previous.addEventListener('input', (event) => {
+  previous.style.backgroundColor = event.target.value;
+  if (previous.style.backgroundColor !== prevColor) {
+    current.style.backgroundColor = prevColor;
   }
-  prevColor = rgba;
-}
-
-previous.addEventListener('click', (evt) => {
-  if (evt.target === previous) {
-    addCurentColor(previous);
-  }
+  prevColor = event.target.value;
 });
 
 current.addEventListener('input', (event) => {
   current.style.backgroundColor = event.target.value;
-  if (current.value !== prevColor) {
+  if (current.style.backgroundColor !== prevColor) {
     previous.style.backgroundColor = prevColor;
   }
+  console.log(prevColor);
   prevColor = event.target.value;
 });
 

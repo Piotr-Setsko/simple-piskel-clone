@@ -8,6 +8,7 @@ import Sortable from 'sortablejs';
 
 let frameCanvas = document.createElement('canvas');
 frameCanvas.classList.add('frame-canvas');
+frameCanvas.classList.add('active-frame');
 frameCanvas.setAttribute('height', 100);
 frameCanvas.setAttribute('width', 100);
 
@@ -43,7 +44,9 @@ ctxFrame.imageSmoothingEnabled = false;
 framesList.addEventListener('click', (event) => {
   const frameToConvas = document.querySelectorAll('.frame-canvas');
   frameToConvas.forEach((item) => {
+    item.classList.remove('active-frame');
     if (event.target === item) {
+      item.classList.add('active-frame');
       frameCanvas = event.target;
       ctxFrame = frameCanvas.getContext('2d');
       ctxFrame.imageSmoothingEnabled = false;
@@ -58,6 +61,8 @@ framesList.addEventListener('click', (event) => {
   const del = document.querySelectorAll('.frame-button--delete');
   del.forEach((item) => {
     if (event.target === item) {
+      event.target.parentElement.previousElementSibling.children[0].classList.add('active-frame');
+      event.target.parentElement.previousElementSibling.children[0].focus();
       event.target.parentElement.remove();
     }
   });
@@ -67,9 +72,7 @@ framesList.addEventListener('click', (event) => {
     if (event.target === item) {
       const domPlace = 'afterend';
       getFrame(event.target.parentElement, domPlace);
-
       const firstCanvas = event.target.parentElement.children[0];
-      // const ctx = firstCanvas.getContext('2d');
       const cloneCanvas = event.target.parentElement.nextElementSibling.children[0];
       const ctxClone = cloneCanvas.getContext('2d');
       ctxClone.drawImage(firstCanvas, 0, 0, firstCanvas.width, firstCanvas.height,
