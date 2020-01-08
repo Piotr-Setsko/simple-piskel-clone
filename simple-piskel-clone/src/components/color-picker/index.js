@@ -1,8 +1,12 @@
 import './index.css';
 
+const picker = document.createElement('button');
+picker.classList.add('page-list__button', 'page-list__button--colorer');
+picker.innerHTML = 'Choose color';
+
 function renderColorPicker() {
   const markup = (
-    `<li class="page-list__item"></li>`
+    '<li class="page-list__item"></li>'
   );
 
   const list = document.querySelector('.instrument__list');
@@ -11,10 +15,6 @@ function renderColorPicker() {
   const li = document.querySelector('.page-list__item');
   li.append(picker);
 }
-
-const picker = document.createElement('button');
-picker.classList.add('page-list__button', 'page-list__button--colorer');
-picker.innerHTML = 'Choose color';
 
 function pick(event, ctx, current, prevColor, previous, sizeCanvas) {
   const DEFAULT_CANVAS_SIZE = 512;

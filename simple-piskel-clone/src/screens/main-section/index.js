@@ -10,7 +10,7 @@ function renderMainSection() {
     </main>`
   );
   const wrapper = document.querySelector('.wrapper__main');
-  wrapper.insertAdjacentHTML("beforeend", markup);
+  wrapper.insertAdjacentHTML('beforeend', markup);
 
   renderTools();
   renderCanvas();

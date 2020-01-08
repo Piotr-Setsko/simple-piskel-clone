@@ -1,9 +1,13 @@
 import './index.css';
 import { canvas } from '../canvas';
 
+const pixelBucket = document.createElement('button');
+pixelBucket.classList.add('page-list__button', 'page-list__button--pixel-bucket');
+pixelBucket.innerHTML = 'Paint all pixels of the same color';
+
 function renderPaintPixels() {
   const markup = (
-    `<li class="page-list__item"></li>`
+    '<li class="page-list__item"></li>'
   );
 
   const list = document.querySelector('.instrument__list');
@@ -13,50 +17,45 @@ function renderPaintPixels() {
   li.append(pixelBucket);
 }
 
-const pixelBucket = document.createElement('button');
-pixelBucket.classList.add('page-list__button', 'page-list__button--pixel-bucket');
-pixelBucket.innerHTML = 'Paint all pixels of the same color';
-
-
 function getColorAtPixel(imageData, x, y) {
-  const {width, data} = imageData
+  const { width, data } = imageData;
 
   return {
     r: data[4 * (width * y + x) + 0],
     g: data[4 * (width * y + x) + 1],
     b: data[4 * (width * y + x) + 2],
-    a: data[4 * (width * y + x) + 3]
-  }
+    a: data[4 * (width * y + x) + 3],
+  };
 }
 
 function setColorAtPixel(imageData, color, x, y) {
-  const {width, data} = imageData
+  const { width, data } = imageData;
 
-  data[4 * (width * y + x) + 0] = color[0] & 0xff
-  data[4 * (width * y + x) + 1] = color[1] & 0xff
-  data[4 * (width * y + x) + 2] = color[2] & 0xff
-  data[4 * (width * y + x) + 3] = color.hasOwnProperty("a") ? color.a : 255 & 0xff
+  data[4 * (width * y + x) + 0] = color[0] || 0;
+  data[4 * (width * y + x) + 1] = color[1] || 0;
+  data[4 * (width * y + x) + 2] = color[2] || 0;
+  data[4 * (width * y + x) + 3] = color[3] || 255;
 }
 
 function colorMatch(a, b) {
-  return a.r === b.r && a.g === b.g && a.b === b.b && a.a === b.a
+  return a.r === b.r && a.g === b.g && a.b === b.b && a.a === b.a;
 }
 
-var getPixelPos = function (x, y) {
-	return (y * canvas.width + x) * 4;
-};
+function getPixelPos(x, y) {
+  return (y * canvas.width + x) * 4;
+}
 
-var paintPixels = function (ctx, startX, startY, fillColor) {
-  var dstImg = ctx.getImageData(0,0,canvas.width,canvas.height);
-  var dstData = dstImg.data;
+function paintPixels(ctx, startX, startY, fillColor) {
+  const dstImg = ctx.getImageData(0, 0, canvas.width, canvas.height);
+  const dstData = dstImg.data;
 
-  var startPos = getPixelPos(startX, startY);
+  const startPos = getPixelPos(startX, startY);
 
-  var startColor = {
-  	r: dstData[startPos],
-    g: dstData[startPos+1],
-    b: dstData[startPos+2],
-    a: dstData[startPos+3]
+  const startColor = {
+    r: dstData[startPos],
+    g: dstData[startPos + 1],
+    b: dstData[startPos + 2],
+    a: dstData[startPos + 3],
   };
 
   for (let i = 0; i < canvas.width; i += 1) {
@@ -67,11 +66,7 @@ var paintPixels = function (ctx, startX, startY, fillColor) {
     }
   }
 
-  ctx.putImageData(dstImg,0,0);
-};
+  ctx.putImageData(dstImg, 0, 0);
+}
 
 export { renderPaintPixels, paintPixels, pixelBucket };
-
-
-
-

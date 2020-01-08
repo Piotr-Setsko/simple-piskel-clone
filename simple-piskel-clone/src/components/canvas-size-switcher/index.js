@@ -1,15 +1,6 @@
 import './index.css';
 import { canvas, ctx } from '../canvas';
-
-function renderCanvasSizeSwither() {
-  const canvasElement = document.querySelector('.canvas-section')
-  canvasElement.prepend(canvasSizeSection);
-
-
-  canvasSizeSection.append(size32);
-  canvasSizeSection.append(size64);
-  canvasSizeSection.append(size128);
-}
+import { frameCanvas, ctxFrame } from '../frames-list';
 
 const canvasSizeSection = document.createElement('div');
 canvasSizeSection.classList.add('canvas-section__size-switcher');
@@ -26,9 +17,30 @@ const size128 = document.createElement('button');
 size128.classList.add('canvas-size', 'size-128');
 size128.innerHTML = '128x128';
 
+function renderCanvasSizeSwither() {
+  const canvasElement = document.querySelector('.canvas-section');
+  canvasElement.prepend(canvasSizeSection);
+
+
+  canvasSizeSection.append(size32);
+  canvasSizeSection.append(size64);
+  canvasSizeSection.append(size128);
+}
+
+function setCanvasSize(sizeCanvas) {
+  const oldimg = ctx.getImageData(0, 0, canvas.width, canvas.height);
+  const delta = (sizeCanvas - canvas.width) / 2;
+  canvas.width = sizeCanvas;
+  canvas.height = sizeCanvas;
+  ctx.putImageData(oldimg, delta, delta);
+  ctxFrame.clearRect(0, 0, frameCanvas.width, frameCanvas.height);
+  ctxFrame.drawImage(canvas, 0, 0, canvas.width, canvas.height,
+    0, 0, frameCanvas.width, frameCanvas.height);
+}
+
 let sizeCanvas = 32;
 
-canvasSizeSection.addEventListener('click', () => {
+canvasSizeSection.addEventListener('click', (event) => {
   for (let i = 0; i < canvasSizeSection.children.length; i += 1) {
     if (event.target !== canvasSizeSection) {
       canvasSizeSection.children[i].classList.remove('canvas-size--active');
@@ -47,17 +59,6 @@ canvasSizeSection.addEventListener('click', () => {
     sizeCanvas = 32;
     setCanvasSize(sizeCanvas);
   }
-})
-
-function setCanvasSize(sizeCanvas) {
-  let delta;
-  let oldimg = ctx.getImageData(0, 0, canvas.width, canvas.height);
-  delta = (sizeCanvas - canvas.width) / 2;
-  canvas.width = sizeCanvas;
-  canvas.height = sizeCanvas;
-  ctx.putImageData(oldimg, delta, delta);
-  ctx2.clearRect(0, 0, frameCanvas.width, frameCanvas.height);
-  ctx2.drawImage(canvas, 0, 0, canvas.width, canvas.height, 0, 0, frameCanvas.width, frameCanvas.height);
-}
+});
 
 export { renderCanvasSizeSwither, sizeCanvas };

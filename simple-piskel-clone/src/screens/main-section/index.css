@@ -1,7 +1,6 @@
 .page-main {
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
+  justify-content: space-around;
   margin: 0 auto;
   margin-top: 80px;
   width: 90%;
@@ -9,4 +8,5 @@
 
 .page-main__central-section {
   display: flex;
+  justify-content: space-around;
 }
