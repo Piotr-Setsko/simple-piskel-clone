@@ -4,8 +4,7 @@ function renderHeader() {
   const markup = (
     `<header class="page-header">
       <div class="main-nav">
-        <button class="main-nav__button button"></button>
-        <h1 class="page-header__title">CodeJam - Pallete</h1>
+        <h1 class="page-header__title">Piskel-Clone</h1>
       </div>
       <button class="page-header__menu button"></button>
     </header>`
