@@ -48,7 +48,7 @@ canvas.addEventListener('click', (event) => {
 
 canvas.onmousedown = (e) => {
   if (picker.parentElement.classList.contains('active')) {
-    pick(e, ctx, current, prevColor, previous, canvas.width);
+    pick(e, ctx, current, canvas.width);
   }
   if (eraser.parentElement.classList.contains('active')) {
     erasePixel(e, ctx, canvas.width);

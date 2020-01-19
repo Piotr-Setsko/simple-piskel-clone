@@ -35,7 +35,6 @@ function colorPixel(data, pos, color) {
   data[pos + 3] = color[3] || 255;
 }
 
-// http://www.williammalone.com/articles/html5-canvas-javascript-paint-bucket-tool/
 function fill(ctx, startX, startY, fillColor) {
   const dstImg = ctx.getImageData(0, 0, canvas.width, canvas.height);
   const dstData = dstImg.data;

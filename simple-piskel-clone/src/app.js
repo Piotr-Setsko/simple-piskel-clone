@@ -21,21 +21,23 @@ const pencil = document.querySelector('.page-list__button--pencil');
 const eraser = document.querySelector('.page-list__button--eraser');
 const pixel = document.querySelector('.page-list__button--pixel-bucket');
 
+const tools = {
+  KeyB: bucket,
+  KeyP: pencil,
+  KeyC: picker,
+  KeyE: eraser,
+  KeyI: pixel
+}
+
 document.addEventListener('keydown', (evt) => {
   for (let i = 0; i < list.children.length; i += 1) {
     list.children[i].classList.remove('active');
   }
-  if (evt.code === 'KeyB') {
-    bucket.parentElement.classList.add('active');
-  } else if (evt.code === 'KeyP') {
-    pencil.parentElement.classList.add('active');
-  } else if (evt.code === 'KeyC') {
-    picker.parentElement.classList.add('active');
-  } else if (evt.code === 'KeyE') {
-    eraser.parentElement.classList.add('active');
-  } else if (evt.code === 'KeyI') {
-    pixel.parentElement.classList.add('active');
-  } else if (evt.code === 'KeyD') {
+  if (evt.code === 'KeyD') {
     localStorage.clear();
+  }
+  const activeElement = tools[evt.code];
+  if (activeElement) {
+    activeElement.parentElement.classList.add('active')
   }
 });

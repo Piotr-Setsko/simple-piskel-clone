@@ -16,7 +16,7 @@ function renderColorPicker() {
   li.append(picker);
 }
 
-function pick(event, ctx, current, prevColor, previous, sizeCanvas) {
+function pick(event, ctx, current, sizeCanvas) {
   const DEFAULT_CANVAS_SIZE = 512;
   const x = event.layerX / (DEFAULT_CANVAS_SIZE / sizeCanvas);
   const y = event.layerY / (DEFAULT_CANVAS_SIZE / sizeCanvas);

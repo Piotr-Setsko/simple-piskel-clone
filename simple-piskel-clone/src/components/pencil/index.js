@@ -27,8 +27,6 @@ function penDraw(e, ctx, sizeCanvas, current) {
   const y = Math.floor(e.layerY / (DEFAULT_CANVAS_SIZE / sizeCanvas));
 
   ctx.fillStyle = current.style.backgroundColor;
-  // console.log(ctx.fillStyle);
-  // console.log(sizePen);
   ctx.globalCompositeOperation = 'source-over';
   if (ctx.fillStyle === 'rgba(0, 0, 0, 0)') {
     ctx.fillStyle = 'rgba(255,255,255,1)';

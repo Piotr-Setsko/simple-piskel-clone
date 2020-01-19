@@ -36,7 +36,7 @@ function renderFramesList() {
   renderFrameNew();
 }
 
-let sortable = Sortable.create(framesList);
+Sortable.create(framesList);
 
 let ctxFrame = frameCanvas.getContext('2d');
 ctxFrame.imageSmoothingEnabled = false;
@@ -50,10 +50,9 @@ framesList.addEventListener('click', (event) => {
       frameCanvas = event.target;
       ctxFrame = frameCanvas.getContext('2d');
       ctxFrame.imageSmoothingEnabled = false;
-      let convasItem = event.target;
       ctx.imageSmoothingEnabled = false;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.drawImage(convasItem, 0, 0, convasItem.width, convasItem.height,
+      ctx.drawImage(frameCanvas, 0, 0, frameCanvas.width, frameCanvas.height,
         0, 0, canvas.width, canvas.height);
     }
   });
